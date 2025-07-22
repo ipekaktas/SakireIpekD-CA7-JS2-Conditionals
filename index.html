@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Sakire Ipek Demircan Aktas">
+  <title>Bear Ninja Hunter</title>
+</head>
+<body>
+  <h1>Bear Ninja Hunter Game</h1>
+  <p id="result">Welcome to the game!</p>
+
+  <script>
+    // Welcome the player to the game
+    let playerName = prompt("Welcome to Bear Hunter Ninja! Please enter your name to get started:");
+
+    // Alert to greet the player
+    alert(`Hi ${playerName}! Let's Play!!`);
+
+    // Prompt the player's choice
+    let playerChoice = prompt("Who are you: Bear, Ninja or Hunter?");
+
+    // Hard-code the computer choice
+    let computerChoice = "Bear";
+
+    // The result message
+    let resultText = playerName + " you chose " + playerChoice + "!<br>" +
+                  "The computer chose " + computerChoice + "!<br>";
+    let consoleText = playerName + " you chose " + playerChoice + "!\n" +
+                  "The computer chose " + computerChoice + "!\n";
+
+    // Determine the winner
+    let winner;
+
+    if (playerChoice === computerChoice) {
+      winner = "It's a Tie!";
+    } else {
+      switch (playerChoice) {
+        case "Bear":
+          if (computerChoice === "Ninja") {
+            winner = "You Win!!";
+          } else {
+            winner = "Computer Wins!";
+          }
+          break;
+        case "Ninja":
+          if (computerChoice === "Hunter") {
+            winner = "You Win!!";
+          } else {
+            winner = "Computer Wins!";
+          }
+          break;
+        case "Hunter":
+          if (computerChoice === "Bear") {
+            winner = "You Win!!";
+          } else {
+            winner = "Computer Wins!";
+          }
+          break;
+        default:
+          winner = "Invalid choice!";
+      }
+    }
+
+    // Output results
+    document.getElementById("result").innerHTML = resultText + winner;
+    console.log(consoleText + winner);
+  </script>
+</body>
+</html>
