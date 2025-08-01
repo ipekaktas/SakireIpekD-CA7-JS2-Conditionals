@@ -3,221 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Sakire Ipek Demircan Aktas">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bear Ninja Hunter Game</title>
+  <title>Bear Ninja Hunter</title>
 </head>
 <body>
+  <h1>Bear Ninja Hunter Game</h1>
   <p id="result">Welcome to the game!</p>
 
   <script>
-    // Declare all variables at the top
-    const choices = ["bear", "ninja", "hunter"];
-    let playerName = "";
-    let playAgain = false;
-    let playerChoice = "";
-    let computerChoice = "";
-    let playerCap = "";
-    let computerCap = "";
-    let winner = "";
-    let resultText = "";
-    let consoleText = "";
-    let again = "";
-    let randomIndex;
-    let i;
-
-    // Stats tracking
-    let totalGames = 0;
-    let playerWins = 0;
-    let computerWins = 0;
-    let ties = 0;
-    let summary = "";
-
     // Welcome the player to the game
-    playerName = prompt("Welcome to Bear Hunter Ninja! Please enter your name to get started:");
+    let playerName = prompt("Welcome to Bear Hunter Ninja! Please enter your name to get started:");
 
-    // Cancel or empty name input
-    if (playerName === null) {
-      // Build summary string inline
-      	  summary = "<h2>Game Summary</h2>" +
-                    "<p>Total games played: " + totalGames + "</p>" +
-                    "<p>Player wins: " + playerWins + "</p>" +
-                    "<p>Computer wins: " + computerWins + "</p>" +
-                    "<p>Ties: " + ties + "</p>" +
-                    "<p>Thanks for playing! Please Press F5 to play again anytime.</p>";
+    // Alert to greet the player
+    alert(`Hi ${playerName}! Let's Play!!`);
 
-      document.getElementById("result").innerHTML = "Please Press F5 to Play Again.<br>" + summary;
-      alert("Please Press F5 to Play Again.");
+    // Prompt the player's choice
+    let playerChoice = prompt("Who are you: Bear, Ninja or Hunter?");
+
+    // Hard-code the computer choice
+    let computerChoice = "Bear";
+
+    // The result message
+    let resultText = playerName + " you chose " + playerChoice + "!<br>" +
+                  "The computer chose " + computerChoice + "!<br>";
+    let consoleText = playerName + " you chose " + playerChoice + "!\n" +
+                  "The computer chose " + computerChoice + "!\n";
+
+    // Determine the winner
+    let winner;
+
+    if (playerChoice === computerChoice) {
+      winner = "It's a Tie!";
     } else {
-      playerName = playerName.trim();
-      if (playerName === "") {
-            summary = "<h2>Game Summary</h2>" +
-                      "<p>Total games played: " + totalGames + "</p>" +
-                      "<p>Player wins: " + playerWins + "</p>" +
-                      "<p>Computer wins: " + computerWins + "</p>" +
-                      "<p>Ties: " + ties + "</p>" +
-                      "<p>Thanks for playing! Please Press F5 to play again anytime.</p>";
-
-        document.getElementById("result").innerHTML = "Please Press F5 to Play Again.<br>" + summary;
-        alert("Please Press F5 to Play Again.");
-      } else {
-        // Capitalize player name first letter only
-        playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1).toLowerCase();
-        alert("Hi " + playerName + "! Let's Play!!");
-
-        playAgain = true;
-
-        while (playAgain) {
-          // Prompt player for choice
-          playerChoice = prompt("Who are you: Bear, Ninja or Hunter?");
-
-          // Handle cancel on player choice prompt
-          if (playerChoice === null) {
-            let summary = "<h2>Game Summary</h2>" +
-                          "<p>Total games played: " + totalGames + "</p>" +
-                          "<p>Player wins: " + playerWins + "</p>" +
-                          "<p>Computer wins: " + computerWins + "</p>" +
-                          "<p>Ties: " + ties + "</p>" +
-                          "<p>Thanks for playing! Please Press F5 to play again anytime.</p>";
-
-            document.getElementById("result").innerHTML = "Please Press F5 to Play Again.<br>" + summary;
-            alert("Please Press F5 to Play Again.");
-            playAgain = false;
-            break;
-          }
-
-          playerChoice = playerChoice.toLowerCase().trim();
-
-          // Validate player choice
-          if (!choices.includes(playerChoice)) {
-            let summary = "<h2>Game Summary</h2>" +
-                          "<p>Total games played: " + totalGames + "</p>" +
-                          "<p>Player wins: " + playerWins + "</p>" +
-                          "<p>Computer wins: " + computerWins + "</p>" +
-                          "<p>Ties: " + ties + "</p>" +
-                          "<p>Thanks for playing! Please Press F5 to play again anytime.</p>";
-
-            document.getElementById("result").innerHTML = "Invalid Entry<br>Please Press F5 to Play Again.<br>" + summary;
-            alert("Invalid Entry\nPlease enter Bear, Ninja, or Hunter.\nPlease Press F5 to Play Again.");
-            playAgain = false;
-            break;
-          }
-
-          // Randomize computer choice
-          randomIndex = Math.floor(Math.random() * choices.length);
-          computerChoice = choices[randomIndex];
-
-          // Capitalize choices for display
-          playerCap = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
-          computerCap = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
-
-          // Countdown in console before displaying results
-          for (i = 3; i > 0; i--) {
-            console.log(i);
-          }
-
-          // Determine the winner
-          if (playerChoice === computerChoice) {
-            winner = "It's a Tie!";
-            ties++;
+      switch (playerChoice) {
+        case "Bear":
+          if (computerChoice === "Ninja") {
+            winner = "You Win!!";
           } else {
-            switch (playerChoice) {
-              case "bear":
-                if (computerChoice === "ninja") {
-                  winner = "You Win!!";
-                  playerWins++;
-                } else {
-                  winner = "Computer Wins!";
-                  computerWins++;
-                }
-                break;
-              case "ninja":
-                if (computerChoice === "hunter") {
-                  winner = "You Win!!";
-                  playerWins++;
-                } else {
-                  winner = "Computer Wins!";
-                  computerWins++;
-                }
-                break;
-              case "hunter":
-                if (computerChoice === "bear") {
-                  winner = "You Win!!";
-                  playerWins++;
-                } else {
-                  winner = "Computer Wins!";
-                  computerWins++;
-                }
-                break;
-            }
+            winner = "Computer Wins!";
           }
-
-          totalGames++;
-
-          // Result message
-          resultText = playerName + " you chose " + playerCap + "!<br>" +
-                       "The computer chose " + computerCap + "!<br>" +
-                       winner;
-
-          consoleText = playerName + " you chose " + playerCap + "!\n" +
-                        "The computer chose " + computerCap + "!\n" +
-                        winner;
-
-          // Output results
-          document.getElementById("result").innerHTML = resultText;
-          console.log(consoleText);
-
-          // Ask if player wants to play again
-          again = prompt(playerName + ", would you like to play again, Yes or No?");
-
-          // Handle cancel on play again prompt
-          if (again === null) {
-                summary = "<h2>Game Summary</h2>" +
-                          "<p>Total games played: " + totalGames + "</p>" +
-                          "<p>Player wins: " + playerWins + "</p>" +
-                          "<p>Computer wins: " + computerWins + "</p>" +
-                          "<p>Ties: " + ties + "</p>" +
-                          "<p>Thanks for playing! Please Press F5 to play again anytime.</p>";
-
-            document.getElementById("result").innerHTML = "Please Press F5 to Play Again.<br>" + summary;
-            alert("Please Press F5 to Play Again.");
-            playAgain = false;
-            break;
+          break;
+        case "Ninja":
+          if (computerChoice === "Hunter") {
+            winner = "You Win!!";
+          } else {
+            winner = "Computer Wins!";
           }
-
-          again = again.toLowerCase().trim();
-
-          // Validate play again input
-          if (again !== "yes" && again !== "no") {
-                summary = "<h2>Game Summary</h2>" +
-                          "<p>Total games played: " + totalGames + "</p>" +
-                          "<p>Player wins: " + playerWins + "</p>" +
-                          "<p>Computer wins: " + computerWins + "</p>" +
-                          "<p>Ties: " + ties + "</p>" +
-                          "<p>Thanks for playing! Please Press F5 to play again anytime.</p>";
-
-            document.getElementById("result").innerHTML = "Invalid Entry<br>Please Press F5 to Play Again.<br>" + summary;
-            alert("Invalid Entry.\nPlease enter Yes or No.\nPlease Press F5 to Play Again.");
-            playAgain = false;
-            break;
+          break;
+        case "Hunter":
+          if (computerChoice === "Bear") {
+            winner = "You Win!!";
+          } else {
+            winner = "Computer Wins!";
           }
-
-          // End game if player says no & show summary. If "yes", loop continues and game restarts.
-          if (again === "no") {
-            playAgain = false;
-            alert("Thanks for playing! Please Press F5 to play again anytime.");
-
-                summary = "<h2>Game Summary</h2>" +
-                          "<p>Total games played: " + totalGames + "</p>" +
-                          "<p>Player wins: " + playerWins + "</p>" +
-                          "<p>Computer wins: " + computerWins + "</p>" +
-                          "<p>Ties: " + ties + "</p>" +
-                          "<p>Thanks for playing! Please Press F5 to play again anytime.</p>";
-
-            document.getElementById("result").innerHTML = summary;
-          }
-        }
+          break;
+        default:
+          winner = "Invalid choice!";
       }
     }
+
+    // Output results
+    document.getElementById("result").innerHTML = resultText + winner;
+    console.log(consoleText + winner);
   </script>
 </body>
 </html>
